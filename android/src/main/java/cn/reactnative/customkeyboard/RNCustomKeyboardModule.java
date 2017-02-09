@@ -42,7 +42,7 @@ public class RNCustomKeyboardModule extends ReactContextBaseJavaModule {
     Handler handle = new Handler(Looper.getMainLooper());
 
     @ReactMethod
-    public void install(final int tag) {
+    public void install(final int tag, final String type) {
         UiThreadUtil.runOnUiThread(new Runnable() {
             @Override
             public void run() {
@@ -52,7 +52,7 @@ public class RNCustomKeyboardModule extends ReactContextBaseJavaModule {
                     return;
                 }
 
-                edit.setTag(TAG_ID, createCustomKeyboard(activity, tag));
+                edit.setTag(TAG_ID, createCustomKeyboard(activity, tag, type));
 
                 edit.setOnFocusChangeListener(new View.OnFocusChangeListener() {
                     @Override
