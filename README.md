@@ -48,7 +48,7 @@ import {
 } from 'react-native';
 import { register, insertText } from 'react-native-custom-keyboard';
 
-class MyKeyboard from Component {
+class MyKeyboard extends Component {
   onPress = () => {
     insertText(this.props.tag, 'Hello, world');
   };
@@ -74,7 +74,7 @@ import {CustomTextInput} from 'react-native-custom-keyboard';
 
 class MyPage extends Component {
   state = {
-    value = '';
+    value: '';
   };
   onChangeText = text => {
     this.setState({value: text});

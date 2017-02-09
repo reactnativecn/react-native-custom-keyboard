@@ -1,5 +1,5 @@
 
-package cn.reactnative.customkeyboard;
+package com.facebook.react.uimanager;
 
 import android.app.Activity;
 import android.graphics.Color;
@@ -28,6 +28,7 @@ import com.facebook.react.bridge.UiThreadUtil;
 import com.facebook.react.bridge.WritableArray;
 import com.facebook.react.uimanager.RootView;
 import com.facebook.react.uimanager.UIManagerModule;
+import com.facebook.react.uimanager.UIViewOperationQueue;
 import com.facebook.react.views.textinput.ReactEditText;
 
 public class RNCustomKeyboardModule extends ReactContextBaseJavaModule {
@@ -41,13 +42,18 @@ public class RNCustomKeyboardModule extends ReactContextBaseJavaModule {
 
     Handler handle = new Handler(Looper.getMainLooper());
 
+    private ReactEditText getEditById(int id) {
+        UIViewOperationQueue uii = this.getReactApplicationContext().getNativeModule(UIManagerModule.class).getUIImplementation().getUIViewOperationQueue();
+        return (ReactEditText) uii.getNativeViewHierarchyManager().resolveView(id);
+    }
+
     @ReactMethod
     public void install(final int tag, final String type) {
         UiThreadUtil.runOnUiThread(new Runnable() {
             @Override
             public void run() {
                 final Activity activity = getCurrentActivity();
-                final ReactEditText edit = (ReactEditText) activity.findViewById(tag);
+                final ReactEditText edit = getEditById(tag);
                 if (edit == null) {
                     return;
                 }
@@ -125,7 +131,7 @@ public class RNCustomKeyboardModule extends ReactContextBaseJavaModule {
             @Override
             public void run() {
                 final Activity activity = getCurrentActivity();
-                final ReactEditText edit = (ReactEditText) activity.findViewById(tag);
+                final ReactEditText edit = getEditById(tag);
                 if (edit == null) {
                     return;
                 }
@@ -141,7 +147,7 @@ public class RNCustomKeyboardModule extends ReactContextBaseJavaModule {
             @Override
             public void run() {
                 final Activity activity = getCurrentActivity();
-                final ReactEditText edit = (ReactEditText) activity.findViewById(tag);
+                final ReactEditText edit = getEditById(tag);
                 if (edit == null) {
                     return;
                 }
@@ -160,7 +166,7 @@ public class RNCustomKeyboardModule extends ReactContextBaseJavaModule {
             @Override
             public void run() {
                 final Activity activity = getCurrentActivity();
-                final ReactEditText edit = (ReactEditText) activity.findViewById(tag);
+                final ReactEditText edit = getEditById(tag);
                 if (edit == null) {
                     return;
                 }
@@ -182,7 +188,7 @@ public class RNCustomKeyboardModule extends ReactContextBaseJavaModule {
             @Override
             public void run() {
                 final Activity activity = getCurrentActivity();
-                final ReactEditText edit = (ReactEditText) activity.findViewById(tag);
+                final ReactEditText edit = getEditById(tag);
                 if (edit == null) {
                     return;
                 }
@@ -204,7 +210,7 @@ public class RNCustomKeyboardModule extends ReactContextBaseJavaModule {
             @Override
             public void run() {
                 final Activity activity = getCurrentActivity();
-                final ReactEditText edit = (ReactEditText) activity.findViewById(tag);
+                final ReactEditText edit = getEditById(tag);
                 if (edit == null) {
                     return;
                 }
@@ -226,7 +232,7 @@ public class RNCustomKeyboardModule extends ReactContextBaseJavaModule {
             @Override
             public void run() {
                 final Activity activity = getCurrentActivity();
-                final ReactEditText edit = (ReactEditText) activity.findViewById(tag);
+                final ReactEditText edit = getEditById(tag);
                 if (edit == null) {
                     return;
                 }
@@ -248,7 +254,7 @@ public class RNCustomKeyboardModule extends ReactContextBaseJavaModule {
             @Override
             public void run() {
                 final Activity activity = getCurrentActivity();
-                final ReactEditText edit = (ReactEditText) activity.findViewById(tag);
+                final ReactEditText edit = getEditById(tag);
                 if (edit == null) {
                     return;
                 }
