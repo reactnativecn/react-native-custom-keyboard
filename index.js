@@ -7,14 +7,14 @@ import {
   findNodeHandle,
 } from 'react-native';
 
-const { RNCustomKeyboard} = NativeModules;
+const { CustomKeyboard} = NativeModules;
 
 const {
   install, uninstall,
   insertText, backSpace, doDelete,
   moveLeft, moveRight,
   switchSystemKeyboard,
-} = RNCustomKeyboard;
+} = CustomKeyboard;
 
 export {
   install, uninstall,
