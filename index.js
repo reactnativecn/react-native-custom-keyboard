@@ -5,6 +5,7 @@ import {
   NativeModules,
   TextInput,
   findNodeHandle,
+  AppRegistry,
 } from 'react-native';
 
 const { CustomKeyboard} = NativeModules;
