@@ -26,6 +26,7 @@ import com.facebook.react.bridge.ReadableMap;
 import com.facebook.react.bridge.ReadableMapKeySetIterator;
 import com.facebook.react.bridge.UiThreadUtil;
 import com.facebook.react.bridge.WritableArray;
+import com.facebook.react.uimanager.IllegalViewOperationException;
 import com.facebook.react.uimanager.RootView;
 import com.facebook.react.uimanager.UIManagerModule;
 import com.facebook.react.uimanager.UIViewOperationQueue;
@@ -43,8 +44,20 @@ public class RNCustomKeyboardModule extends ReactContextBaseJavaModule {
     Handler handle = new Handler(Looper.getMainLooper());
 
     private ReactEditText getEditById(int id) {
-        UIViewOperationQueue uii = this.getReactApplicationContext().getNativeModule(UIManagerModule.class).getUIImplementation().getUIViewOperationQueue();
-        return (ReactEditText) uii.getNativeViewHierarchyManager().resolveView(id);
+        UIViewOperationQueue uii = null;
+        ReactEditText edit = null;
+        while (edit == null) {
+            // we assume the native component will be instantiated at some point, so just
+            // loop until it appears. Most of the time, the first pass will pick it up.
+            uii = this.getReactApplicationContext().getNativeModule(UIManagerModule.class).getUIImplementation().getUIViewOperationQueue();
+            try {
+                edit = (ReactEditText) uii.getNativeViewHierarchyManager().resolveView(id);
+            }
+            catch (IllegalViewOperationException e) {
+                // do nothing
+            }
+        }
+        return edit;
     }
 
     @ReactMethod
